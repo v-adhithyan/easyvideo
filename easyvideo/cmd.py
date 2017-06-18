@@ -23,26 +23,28 @@ def main():
 
         if confirm:
             os.remove(config.get_current_shortcut())
+            print "Removed shortcut from desktop .."
+
+            delete = choice.Binary("Do you want to delete {} from the system?".format(current_movie), False).ask()
+            if delete:
+                os.remove(config.get_movie_path())
+                print "Deleted {}".format(current_movie)
             config.remove_current_section()
 
     prompt = "pick"
     path = config.get_movie_folder()
 
-
     os_name = platform.system()
     item = ""
 
     if os_name == "Windows":
-
-
         answer = choice.Menu(os.listdir(path)).ask()
         os.chdir(path)
         while not os.path.isfile(answer):
-            print "Chosen folder {}".format(answer)
+            print "Chosen folder: {}".format(answer)
 
             os.chdir(answer)
             answer = choice.Menu(os.listdir(path)).ask()
-            #answer = inquirer.prompt(questions)
 
         item = answer
     else:
@@ -54,7 +56,7 @@ def main():
         os.chdir(path)
         answer = inquirer.prompt(questions)
         while not os.path.isfile(answer[prompt]):
-            print "Chosen folder {}".format(answer[prompt])
+            print "Chosen folder: {}".format(answer[prompt])
 
             questions = [
                 inquirer.List(prompt,
@@ -65,7 +67,7 @@ def main():
             answer = inquirer.prompt(questions)
             item = answer[prompt]
 
-    print "Picked {}".format(item)
+    print "Picked: {}".format(item)
     cwd = os.getcwd() + os.path.sep
     f = cwd + item
     config.write(CURRENT, MOVIE_NAME, item)
@@ -73,7 +75,7 @@ def main():
 
     if os_name == "Windows":
         shortcut = "{}.lnk".format(item)
-        config.write(CURRENT, SHORTCUT, shortcut)
+        config.write(CURRENT, SHORTCUT, os.path.join(winshell.desktop(), shortcut))
         print "Creating shortcut to {} in desktop".format(item)
         winshell.CreateShortcut(
             Path=os.path.join(winshell.desktop(), "{}.lnk".format(item)),
