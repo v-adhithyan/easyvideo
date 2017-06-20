@@ -1,3 +1,5 @@
+import argparse
+import sys
 import easyvideo
 import subprocess
 import os
@@ -9,6 +11,7 @@ from easyvideo import CURRENT
 from easyvideo import MOVIE_NAME
 from easyvideo import FULL_PATH
 from easyvideo import SHORTCUT
+from easyvideo import bluetooth_server
 import winshell
 import choice
 
@@ -16,6 +19,13 @@ def main():
     if not config.config_file_exists():
         path = raw_input("Enter the movie folder path:")
         config.write(MOVIE_FOLDER, FOLDER, path)
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-b", "--bluetooth", help="Enable bluetooth controller", action="store_true")
+    args = parser.parse_args()
+
+    if args.bluetooth:
+        bluetooth_server.run()
 
     current_movie = config.get_current_movie()
     if current_movie is not None:

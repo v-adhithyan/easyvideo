@@ -1,12 +1,7 @@
 import os
 import ConfigParser
 import io
-from easyvideo import MOVIE_FOLDER
-from easyvideo import FOLDER
-from easyvideo import CURRENT
-from easyvideo import MOVIE_NAME
-from easyvideo import SHORTCUT
-from easyvideo import FULL_PATH
+from easyvideo import *
 
 home = os.path.expanduser("~") + os.path.sep
 config_file = home + ".easyvideo.ini"
@@ -67,5 +62,14 @@ def get_current_shortcut():
 def get_movie_path():
     return read(CURRENT, FULL_PATH)
 
+def get_android_folder():
+    return read(ANDROID, ANDROID_FOLDER)
+
+def set_android_folder(value):
+    write(ANDROID, ANDROID_FOLDER, value)
+
 def remove_current_section():
     remove_section(CURRENT)
+
+def remove_android_section():
+    remove_section(ANDROID)

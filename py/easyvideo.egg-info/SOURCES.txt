@@ -1,0 +1,14 @@
+setup.py
+easyvideo/__init__.py
+easyvideo/bluetooth_server.py
+easyvideo/cmd.py
+easyvideo/config.py
+easyvideo/controller.py
+easyvideo/util.py
+easyvideo/windows.py
+easyvideo.egg-info/PKG-INFO
+easyvideo.egg-info/SOURCES.txt
+easyvideo.egg-info/dependency_links.txt
+easyvideo.egg-info/entry_points.txt
+easyvideo.egg-info/requires.txt
+easyvideo.egg-info/top_level.txt
