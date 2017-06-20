@@ -1,3 +1,0 @@
-[console_scripts]
-easyvideo = easyvideo.cmd:main
-
