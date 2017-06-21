@@ -8,6 +8,7 @@ setup(
         'winshell>=0.6',
         'pywinauto>=0.6.2',
         'pywin32>=220',
+        'pyautogui>=0.9.36',
     ],
     packages=['easyvideo'],
     entry_points={

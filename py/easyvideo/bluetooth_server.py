@@ -40,11 +40,23 @@ def run():
             else:
                 client.send(DELIMITER.join(message))
 
-        if "play" in data:
+        elif "play" in data:
             controller.playback()
-            client.send("play")
+            client.send("done")
 
-        if data == "quit":
+        elif "volumeup" in data:
+            controller.volume_up()
+            client.send("done")
+
+        elif "volumedown" in data:
+            controller.volume_down()
+            client.send("done")
+
+        elif "mute" in data:
+            controller.mute_unmute()
+            client.send("done")
+
+        elif data == "quit":
             break
         client.close()
 

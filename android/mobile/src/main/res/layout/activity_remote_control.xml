@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="ceg.avtechlabs.easyvideo.ui.RemoteControlActivity"
+    android:gravity="center" >
+
+    <Button
+        android:id="@+id/button_playback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Play/Pause"
+        android:onClick="playback"/>
+
+    <Button
+        android:id="@+id/button_volumedown"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Volume up"
+        android:onClick="volumeUp"/>
+
+    <Button
+        android:id="@+id/button_volumeup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Volume down"
+        android:onClick="volumeDown"/>
+
+    <Button
+        android:id="@+id/button_mute"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mute/Unmute"
+        android:onClick="mute"/>
+
+</LinearLayout>

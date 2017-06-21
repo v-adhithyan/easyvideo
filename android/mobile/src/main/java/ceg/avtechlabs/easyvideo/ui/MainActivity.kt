@@ -8,26 +8,14 @@ import android.os.Bundle
 
 import ceg.avtechlabs.easyvideo.R
 import android.widget.Toast
-import android.R.attr.data
 import android.app.ProgressDialog
-import android.bluetooth.BluetoothAdapter.STATE_CONNECTED
 import android.bluetooth.BluetoothDevice
-import android.bluetooth.BluetoothServerSocket
-import android.bluetooth.BluetoothSocket
-import android.os.Handler
-import android.os.Looper
-import android.os.Message
 import android.util.Log
-import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.ProgressBar
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 import kotlin.collections.HashMap
-import android.widget.AdapterView
 import android.widget.AdapterView.OnItemClickListener
-import ceg.avtechlabs.easyvideo.threads.SendThread
-import android.provider.Settings.Global.DEVICE_NAME
 import ceg.avtechlabs.easyvideo.util.Globals
 
 
@@ -92,7 +80,7 @@ class MainActivity : AppCompatActivity() {
         listview_devices.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, deviceNames)
         listview_devices.setOnItemClickListener(OnItemClickListener {
             arg0, arg1, position, arg3 ->
-            val intent = Intent(this, ControllerActivity::class.java)
+            val intent = Intent(this, ListActivity::class.java)
             intent.putExtra(MainActivity.DEVICE_NAME, deviceNames[position])
             Globals.device = deviceMap[deviceNames[position]]
             startActivity(intent)

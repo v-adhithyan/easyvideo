@@ -11,7 +11,9 @@ class Globals {
         var device: BluetoothDevice? = null
         val EV_RESPONSE = 0
         val EV_EMPTY = -1
+        val EV_PLAY = 1
         val EV_LIST = "ev_list"
+        val EV_PLAY_RESPONSE = "ev_play"
         val DELIMITER = ",,,"
     }
 }

@@ -35,7 +35,12 @@ class SendThread(message: String, handler: Handler, list: Boolean): Thread() {
     }
 
     override fun run() {
-        socket?.connect()
+        try {
+            socket?.connect()
+        } catch (ex: Exception) {
+            // Todo : send turn on bluetooth server alert on app
+        }
+
         if(socket != null) {
             val outputStream = socket?.outputStream
             outputStream?.write(send)
@@ -51,11 +56,15 @@ class SendThread(message: String, handler: Handler, list: Boolean): Thread() {
 
                 if (size > 0) {
                     val content = String(buffer.copyOfRange(0, size!!))
-                    val message = mHandler.obtainMessage(Globals.EV_RESPONSE)
-                    val bundle = Bundle()
-                    if (mList) bundle.putString(Globals.EV_LIST, content)
-                    message.data = bundle
-                    mHandler.sendMessage(message)
+                    if (content.contains("play")) {
+                        mHandler.sendEmptyMessage(Globals.EV_PLAY)
+                    } else  {
+                        val message = mHandler.obtainMessage(Globals.EV_RESPONSE)
+                        val bundle = Bundle()
+                        if (mList) bundle.putString(Globals.EV_LIST, content)
+                        message.data = bundle
+                        mHandler.sendMessage(message)
+                    }
                     break
                 }
 

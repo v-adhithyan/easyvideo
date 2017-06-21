@@ -20,7 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.ControllerActivity"></activity>
+        <activity android:name=".ui.ListActivity" />
+        <activity android:name=".ui.RemoteControlActivity"></activity>
     </application>
 
 </manifest>
