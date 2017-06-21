@@ -56,6 +56,18 @@ def run():
             controller.mute_unmute()
             client.send("done")
 
+        elif "fullscreen" in data:
+            controller.go_fullscreen()
+            client.send("done")
+
+        elif "lock" in data:
+            controller.lock()
+            client.send("done")
+
+        elif "shutdown" in data:
+            controller.shutdown()
+            client.send("done")
+            
         elif data == "quit":
             break
         client.close()

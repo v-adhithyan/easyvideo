@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Message
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -24,6 +26,20 @@ class ListActivity : AppCompatActivity() {
 
         title = "Connected to ${intent.getStringExtra(MainActivity.DEVICE_NAME)}"
 
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_list, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.menu_rc -> { startActivity(Intent(this, RemoteControlActivity::class.java))}
+            else -> {}
+        }
+
+        return true
     }
 
     fun list(v: View) {

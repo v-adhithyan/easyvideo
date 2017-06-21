@@ -11,6 +11,8 @@ import android.widget.Toast
 import android.app.ProgressDialog
 import android.bluetooth.BluetoothDevice
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*

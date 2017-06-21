@@ -37,4 +37,25 @@
         android:text="Mute/Unmute"
         android:onClick="mute"/>
 
+    <Button
+        android:id="@+id/button_fullscreen"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fullscreen"
+        android:onClick="goFullscreen"/>
+
+    <Button
+        android:id="@+id/button_lock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lock"
+        android:onClick="lock"/>
+
+    <Button
+        android:id="@+id/button_shutdown"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Shutdown"
+        android:onClick="shutdown"/>
+
 </LinearLayout>

@@ -2,6 +2,7 @@ import os
 import pywinauto
 import win32gui
 import pyautogui
+import ctypes
 from easyvideo import *
 
 def playback():
@@ -32,3 +33,12 @@ def volume_down():
 
 def mute_unmute():
     pyautogui.press("volumemute")
+
+def go_fullscreen():
+    pyautogui.press("f")
+
+def lock():
+    ctypes.windll.user32.LockWorkStation()
+
+def shutdown():
+    os.system("shutdown -s")

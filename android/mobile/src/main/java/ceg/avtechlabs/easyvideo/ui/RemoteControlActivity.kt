@@ -37,6 +37,18 @@ class RemoteControlActivity : AppCompatActivity() {
         sendCommand("mute")
     }
 
+    fun goFullscreen(v: View) {
+        sendCommand("fullscreen")
+    }
+
+    fun lock(v: View) {
+        sendCommand("lock")
+    }
+
+    fun shutdown(v:View) {
+        sendCommand("shutdown")
+    }
+
     fun sendCommand(message: String) {
         showProgressBar()
         SendThread(message = message, handler = mHandler, list = true).start()
