@@ -2,4 +2,7 @@
     <string name="app_name">Easy Video</string>
     <string name="menu_rc">Remote control</string>
     <string name="bt_not_enabled_leaving">Bluetooth is required to run the app. Quitting the app.</string>
+
+    <string name="pref_first_launch">firstLaunch</string>
+    <string name="pref_bt_device_name">btDeviceName</string>
 </resources>

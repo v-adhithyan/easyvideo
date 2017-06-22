@@ -16,4 +16,5 @@ class Globals {
         val EV_PLAY_RESPONSE = "ev_play"
         val DELIMITER = ",,,"
     }
+
 }

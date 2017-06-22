@@ -10,6 +10,11 @@ import ceg.avtechlabs.easyvideo.R
 import android.widget.Toast
 import android.app.ProgressDialog
 import android.bluetooth.BluetoothDevice
+import android.content.Context
+import android.content.DialogInterface
+import android.content.SharedPreferences
+import android.preference.Preference
+import android.support.v7.app.AlertDialog
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -25,6 +30,9 @@ class MainActivity : AppCompatActivity() {
     val REQUEST_ENABLE_BT = 1
     var progressBar: ProgressDialog? = null
     val deviceMap: HashMap<String, BluetoothDevice> = HashMap<String, BluetoothDevice>()
+
+    val firstLaunch = getString(R.string.pref_first_launch)
+    val btDeviceName = getString(R.string.pref_bt_device_name)
 
     companion object {
         var bluetoothAdapter: BluetoothAdapter? = null
@@ -74,21 +82,55 @@ class MainActivity : AppCompatActivity() {
 
         val deviceNames = LinkedList<String>()
 
+        val name = getStoredDeviceName()
+
         for (device in pairedDevices) {
             deviceNames.add(device.name)
             deviceMap.put(device.name, device)
+
+            if(name != null && device.name == name) {
+                progressBar?.dismiss()
+
+                val intent = Intent(this, ListActivity::class.java)
+                intent.putExtra(MainActivity.DEVICE_NAME, name)
+                Globals.device = deviceMap[name]
+                startActivity(intent)
+                finish()
+                break
+            }
         }
 
-        listview_devices.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, deviceNames)
-        listview_devices.setOnItemClickListener(OnItemClickListener {
-            arg0, arg1, position, arg3 ->
-            val intent = Intent(this, ListActivity::class.java)
-            intent.putExtra(MainActivity.DEVICE_NAME, deviceNames[position])
-            Globals.device = deviceMap[deviceNames[position]]
-            startActivity(intent)
-        })
+        if (name == null) {
+            listview_devices.adapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, deviceNames)
+            listview_devices.setOnItemClickListener(OnItemClickListener {
+                arg0, arg1, position, arg3 ->
+                showDeviceStoreAlert(getPreferences(Context.MODE_PRIVATE), deviceNames[position])
+                val intent = Intent(this, ListActivity::class.java)
+                intent.putExtra(MainActivity.DEVICE_NAME, deviceNames[position])
+                Globals.device = deviceMap[deviceNames[position]]
+                startActivity(intent)
+            })
+        }
 
         progressBar?.dismiss()
     }
 
+    fun getStoredDeviceName(): String? {
+        return getPreferences(Context.MODE_PRIVATE).getString(btDeviceName, null)
+    }
+
+    fun showDeviceStoreAlert(preference: SharedPreferences, name: String) {
+        val alert = AlertDialog.Builder(this)
+        alert.setTitle("easyvideo")
+        alert.setMessage("Is this the default device?")
+        alert.setPositiveButton("Yes", object :DialogInterface.OnClickListener {
+            override fun onClick(dialog: DialogInterface?, which: Int) {
+                val editor = preference.edit()
+                //editor.putBoolean(firstLaunch, true)
+                editor.putString(btDeviceName, name)
+            }
+        })
+        alert.setNegativeButton("No", null)
+        alert.show()
+    }
 }
